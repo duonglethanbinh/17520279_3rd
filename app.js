@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
-//morgan Logging middleware for node.js http apps.
+//morgan logging middleware for node.js http apps.
 
 const placeRoutes = require('./api/routes/places');
 
@@ -12,11 +12,12 @@ app.use(morgan('dev'));
 //Routes which should handle request
 app.use('/places', placeRoutes);
 //Main page
+const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
     return res.status(200).json({
-        message: 'Hello world'
-    }); 
-  });
+        message: 'Hi there, please click into ' + req.hostname + port + '/places to check some HTTP request'
+    });
+});
 
 //Handel error
 app.use((req, res, next) => {
@@ -25,10 +26,10 @@ app.use((req, res, next) => {
     next(error);
 });
 // Handle all kinds of errors
-app.use((error,req,res,next)=>{
-    res.status(error.status||500);
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
     res.json({
-        error:{
+        error: {
             message: error.message
         }
     });

@@ -10,29 +10,36 @@ const router = express.Router();
 */
 router.get('/', (req, res, next) => {
     res.status(200).json({
-        message: 'Places were undefinded'
+        message: 'Places were undefinded. ',
+        description: 'Please type /places/##',
+        node: '## is Id-name of place you want'
     });
 });
 
 
-router.get('/:placeId', (req, res, next) => {
+router.get('/:placeid', (req, res, next) => {
     res.status(200).json({
-        message: req.params.placeId + ' details',
-        place_Id: req.params.placeId
+        place_Id: req.params.placeid,
+        message: req.params.placeid + ' details'
     });
 });
 
-router.post('/:placeId', (req, res, next) => {
+router.post('/:placeid', (req, res, next) => {
+    res.status(405).json({
+        Error: 'Method not allowed'
+    });
+});
+router.put('/:placeid', (req, res, next) => {
     res.status(200).json({
-        message: req.params.placeId + ' were posted',
-        place_Id: req.params.placeId
+        place_Id: req.params.placeid,
+        message: req.params.placeid + ' were updated'
     });
 });
 
-router.delete('/:placeId', (req, res, next) => {
+router.delete('/:placeid', (req, res, next) => {
     res.status(200).json({
-        message: req.params.placeId + ' were deleted',
-        place_Id: req.params.placeId
+        place_Id: req.params.placeid,
+        message: req.params.placeid + ' were deleted'
     });
 });
 
