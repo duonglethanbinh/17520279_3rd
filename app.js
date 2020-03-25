@@ -15,7 +15,7 @@ app.use('/places', placeRoutes);
 const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
     return res.status(200).json({
-        message: 'Hi there, please click into ' + req.hostname + port + '/places to check some HTTP request'
+        message: 'Hi there, please click into ' + req.hostname + '/places to check some HTTP request'
     });
 });
 
