@@ -8,39 +8,37 @@ const router = express.Router();
  3) PATH is a path on the server.
  4) HANDLER is the function executed when the route is matched.
 */
+
 router.get('/', (req, res, next) => {
     res.status(200).json({
-        message: 'Places were undefinded. ',
-        description: 'Please type /places/##',
-        node: '## is Id-name of place you want'
+        message: 'location were undefinded.',
     });
 });
 
 
-router.get('/:placeid', (req, res, next) => {
+router.get('/:locationid', (req, res, next) => {
     res.status(200).json({
-        place_Id: req.params.placeid,
-        message: req.params.placeid + ' details'
+        location_id: req.params.locationid,
+        message: req.params.locationid + ' details'
     });
 });
 
-router.post('/:placeid', (req, res, next) => {
+router.post('/:locationid', (req, res, next) => {
     res.status(405).json({
         Error: 'Method not allowed'
     });
 });
-router.put('/:placeid', (req, res, next) => {
+router.put('/:locationid', (req, res, next) => {
     res.status(200).json({
-        place_Id: req.params.placeid,
-        message: req.params.placeid + ' were updated'
+        location_id: req.params.locationid,
+        message: req.params.locationid + ' were updated'
     });
 });
 
-router.delete('/:placeid', (req, res, next) => {
+router.delete('/:locationid', (req, res, next) => {
     res.status(200).json({
-        place_Id: req.params.placeid,
-        message: req.params.placeid + ' were deleted'
+        location_id: req.params.locationid,
+        message: req.params.locationid + ' were deleted'
     });
 });
-
 module.exports = router;

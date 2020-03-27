@@ -1,23 +1,79 @@
 const express = require('express');
-const app = express();
+const app = express();//morgan logging middleware for node.js http apps.
 const morgan = require('morgan');
-//morgan logging middleware for node.js http apps.
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
-const placeRoutes = require('./api/routes/places');
-
-// Predefined Formats: default, short, tiny, dev
+const placeRoutes = require('./api/routes/location');
+// Predefined Formats: default, short, tiny, dev 
 // dev - Concise output colored by response status for development use.
-app.use(morgan('dev'));
-
 //Routes which should handle request
-app.use('/places', placeRoutes);
+app.use(morgan('dev'));
+app.use('/location', placeRoutes);
 //Main page
-const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
     return res.status(200).json({
-        message: 'Hi there, please click into ' + req.hostname + '/places to check some HTTP request'
+        message: 'Hi there, please click into ' + req.hostname + '/location to check some HTTP request'
     });
 });
+
+// Extended: https://swagger.io/specification/#infoObject
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            title: "Location API",
+            description: "Location API Information",
+            contact: {
+                name: "Thanh Binh"
+            },
+            servers: ["http://localhost:3000"]
+        }
+    },
+    // Path to the API docs
+    apis: ["app.js"]
+};
+
+// // Initialize swagger-jsdoc -> returns validated swagger spec in json format
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+//Routes
+/**
+ * @swagger
+ * /:
+ *  get:
+ *    description: Get respond in main page www.hosting.com/
+ *    responses:
+ *      '200':
+ *        description: Hi there, please click into ' + req.hostname + '/location to check some HTTP request
+ * /location:
+ *  get:
+ *    description: Get respond in .../location
+ *    responses:
+ *      '200':
+ *        description: location were undefinded.
+ * /location/{locationid}:
+ *  get:
+ *    description: Get respond in .../location/{locationid}
+ *    responses:
+ *      '200':
+ *        description: Show location_id details
+ *  post:
+ *    description: Get respond in .../location/{locationid}
+ *    responses:
+ *      '405':
+ *        description: Error 'Method not allowed'
+ *  put:
+ *    description: Get respond in .../location/{locationid}
+ *    responses:
+ *      '200':
+ *        description: Show location_id were updated
+ *  delete:
+ *    description: Get respond in .../location/{locationid}
+ *    responses:
+ *      '200':
+ *        description: Show location_id were deleted
+ */
+
 
 //Handel error
 app.use((req, res, next) => {
@@ -34,7 +90,5 @@ app.use((error, req, res, next) => {
         }
     });
 });
-
-// module is a variable that represents current module
-// exports is an object that will be exposed as a module
+// module is a variable that represents current module, exports is an object that will be exposed as a module
 module.exports = app;
