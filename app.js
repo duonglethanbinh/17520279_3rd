@@ -21,13 +21,16 @@ app.get('/', (req, res) => {
 const swaggerOptions = {
     swaggerDefinition: {
         info: {
+            description: "This is an Api docs about Assignment Third Week: <strong>Create a Restful API server using Node JS</strong> <br>We try to get locationAPI information <br>There are some instructions: <ul> <li> Using Nodejs + express to make a restful api server (just simple API, don't need to connect database or do some complicated processes)</li><li> Handle the source code using github</li><li> Using postman to test api </li><li>Using API Doc to generate the API document for API (Student also can use swagger) </li><li>Link the github to heroku to deploy the API to cloud.</li></ul>",
+            version: "1.0.0",
             title: "Location API",
-            description: "Location API Information",
             contact: {
-                name: "Thanh Binh"
-            },
-            servers: ["http://localhost:3000"]
-        }
+                email: "17520279@gm.uit.edu.vn",
+                name: "Duong Le Thanh Binh"
+            }
+        },
+        host: 'localhost:3000', // Host (optional)
+        basePath: '/', // Base path (optional)
     },
     // Path to the API docs
     apis: ["app.js"]
@@ -41,34 +44,67 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  * @swagger
  * /:
  *  get:
- *    description: Get respond in main page www.hosting.com/
+ *    tags: [/]
+ *    summary: Returns main page status
+ *    description: Get response in main page url/
  *    responses:
  *      '200':
  *        description: Hi there, please click into ' + req.hostname + '/location to check some HTTP request
  * /location:
  *  get:
- *    description: Get respond in .../location
+ *    tags: [location]
+ *    summary: Return a list of all location
+ *    description: Get response in url/location
  *    responses:
  *      '200':
- *        description: location were undefinded.
+ *        description: List of all location
+ *  post:
+ *    tags: [location]
+ *    summary: Create a new location
+ *    description: Get response in url/location
+ *    responses:
+ *      '200':
+ *        description: Create a new location
+ *  put:
+ *    tags: [location]
+ *    summary: Bulk update of location
+ *    description: Get response in url/location
+ *    responses:
+ *      '200':
+ *        description: Bulk update of location
+ *  delete:
+ *    tags: [location]
+ *    summary: Delete all of location
+ *    description: Get response in url/location
+ *    responses:
+ *      '200':
+ *        description: Delete all of location
  * /location/{locationid}:
  *  get:
- *    description: Get respond in .../location/{locationid}
+ *    tags: [location]
+ *    summary: Returns a specific location
+ *    description: Get response in rul/location/{locationid}
  *    responses:
  *      '200':
  *        description: Show location_id details
  *  post:
- *    description: Get respond in .../location/{locationid}
+ *    tags: [location]
+ *    summary: Returns POST location_id status
+ *    description: Get response in .../location/{locationid}
  *    responses:
  *      '405':
- *        description: Error 'Method not allowed'
+ *        description: Method not allowed (405)
  *  put:
- *    description: Get respond in .../location/{locationid}
+ *    tags: [location]
+ *    summary: Updates a specific location
+ *    description: Get response in .../location/{locationid}
  *    responses:
  *      '200':
  *        description: Show location_id were updated
  *  delete:
- *    description: Get respond in .../location/{locationid}
+ *    tags: [location]
+ *    summary: Delete a specific location
+ *    description: Get response in .../location/{locationid}
  *    responses:
  *      '200':
  *        description: Show location_id were deleted

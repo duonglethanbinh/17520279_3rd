@@ -9,20 +9,35 @@ const router = express.Router();
  4) HANDLER is the function executed when the route is matched.
 */
 
+// localhost:3000/location
 router.get('/', (req, res, next) => {
     res.status(200).json({
-        message: 'location were undefinded.',
+        message: 'Here are list of all location',
+    });
+});
+router.post('/', (req, res, next) => {
+    res.status(200).json({
+        message: 'Create a new location',
+    });
+});
+router.put('/', (req, res, next) => {
+    res.status(200).json({
+        message: 'Bulk update of location',
+    });
+});
+router.delete('/', (req, res, next) => {
+    res.status(200).json({
+        message: 'Delete all location',
     });
 });
 
-
+// localhost:3000/location/:locationid
 router.get('/:locationid', (req, res, next) => {
     res.status(200).json({
         location_id: req.params.locationid,
-        message: req.params.locationid + ' details'
+        message: req.params.locationid + ' in detail'
     });
 });
-
 router.post('/:locationid', (req, res, next) => {
     res.status(405).json({
         Error: 'Method not allowed'
@@ -34,7 +49,6 @@ router.put('/:locationid', (req, res, next) => {
         message: req.params.locationid + ' were updated'
     });
 });
-
 router.delete('/:locationid', (req, res, next) => {
     res.status(200).json({
         location_id: req.params.locationid,
