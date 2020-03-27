@@ -27,10 +27,9 @@ const swaggerOptions = {
             contact: {
                 email: "17520279@gm.uit.edu.vn",
                 name: "Duong Le Thanh Binh"
-            }
-        },
-        host: 'localhost:3000', // Host (optional)
-        basePath: '/', // Base path (optional)
+            },
+            servers: ["http://localhost:3000"]
+        }
     },
     // Path to the API docs
     apis: ["app.js"]
