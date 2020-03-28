@@ -62,7 +62,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *    summary: Create a new location
  *    description: Get response in url/location
  *    responses:
- *      '200':
+ *      '201':
  *        description: Create a new location
  *  put:
  *    tags: [location]
@@ -83,6 +83,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *    tags: [location]
  *    summary: Returns a specific location
  *    description: Get response in rul/location/{locationid}
+ *    parameters:
+ *    - name: locationid
+ *      description: Please enter location id
+ *      in: path
+ *      required: true
+ *      type: string
  *    responses:
  *      '200':
  *        description: Show location_id details
@@ -97,6 +103,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *    tags: [location]
  *    summary: Updates a specific location
  *    description: Get response in .../location/{locationid}
+ *    parameters:
+ *    - name: locationid
+ *      description: Please enter location id
+ *      in: path
+ *      required: true
+ *      type: string
  *    responses:
  *      '200':
  *        description: Show location_id were updated
@@ -104,6 +116,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *    tags: [location]
  *    summary: Delete a specific location
  *    description: Get response in .../location/{locationid}
+ *    parameters:
+ *    - name: locationid
+ *      description: Please enter location id
+ *      in: path
+ *      required: true
+ *      type: string
  *    responses:
  *      '200':
  *        description: Show location_id were deleted
